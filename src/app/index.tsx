@@ -1,98 +1,62 @@
-import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+//นำเข้า  ดู   ข้อความ จาก  ชื่อไลบรารี่
+import { StyleSheet, Text, View,Image } from "react-native";
 
-import { AnimatedIcon } from '@/components/animated-icon';
-import { HintRow } from '@/components/hint-row';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { WebBadge } from '@/components/web-badge';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
-
-function getDevMenuHint() {
-  if (Platform.OS === 'web') {
-    return <ThemedText type="small">use browser devtools</ThemedText>;
-  }
-  if (Device.isDevice) {
-    return (
-      <ThemedText type="small">
-        shake device or press <ThemedText type="code">m</ThemedText> in terminal
-      </ThemedText>
-    );
-  }
-  const shortcut = Platform.OS === 'android' ? 'cmd+m (or ctrl+m)' : 'cmd+d';
+//ส่งออก เริ่มต้น   ฟังก์ชัน   ชื่อฟังก์ชัน
+export default function App() {
+  //ส่งกลับออกไป
   return (
-    <ThemedText type="small">
-      press <ThemedText type="code">{shortcut}</ThemedText>
-    </ThemedText>
-  );
+    <View style={homeStyle.container} >
+      {/* ใส่ข้อความ */}
+
+      <Text style={homeStyle.title}>Sasikan</Text>
+      
+      {/* ใส่ภาพจากไฟล์ */}
+      <Image 
+      source ={require('@/assets/bigmom.jpg')}
+      //นำภาพมาจาก
+      style={{
+        width:200,//กว้าง
+        height:200,//ยาว
+        borderRadius:200,//ขอบม่น(ให้กลมคือครึ่งหนึ่งของกว้าง)
+        borderWidth:10,//ขนาดกรอบ
+        borderColor:"gold",//สีกรอบ
+      }}
+      />
+      <Image
+        source ={{uri:"https://seattleschild-com-images.s3.amazonaws.com/wp-content/uploads/2025/12/OtterPupExam12-scaled.jpg"}}
+
+        style={{
+        width:200,//กว้าง
+        height:200,//ยาว
+        borderRadius:2,//ขอบม่น(ให้กลมคือครึ่งหนึ่งของกว้าง)
+        
+     
+      }}
+        />
+        <View style ={{flexDirection:"row"}}>
+          <Text>numnumchok</Text>
+         <Text>jiwjeang</Text>
+         
+        </View>
+   
+    </View>
+  )
 }
-
-export default function HomeScreen() {
-  return (
-    <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={styles.heroSection}>
-          <AnimatedIcon />
-          <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
-          </ThemedText>
-        </ThemedView>
-
-        <ThemedText type="code" style={styles.code}>
-          get started
-        </ThemedText>
-
-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-          />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
-        </ThemedView>
-
-        {Platform.OS === 'web' && <WebBadge />}
-      </SafeAreaView>
-    </ThemedView>
-  );
-}
-
-const styles = StyleSheet.create({
+//สร้างสไตล์ตกแต่ง
+const homeStyle = StyleSheet.create({
+  //กล่อง
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
+    //พื้นหลังสี         แดง
+    backgroundColor: "pink",
+    flex:1, //ขยายเต็มพื้นที่
+    alignItems:"center",
   },
-  safeArea: {
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    alignItems: 'center',
-    gap: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.three,
-    maxWidth: MaxContentWidth,
-  },
-  heroSection: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    gap: Spacing.four,
-  },
+  //มีไว้เผื่อใช้ จะไม่แสดงออกทันที
   title: {
-    textAlign: 'center',
-  },
-  code: {
-    textTransform: 'uppercase',
-  },
-  stepContainer: {
-    gap: Spacing.three,
-    alignSelf: 'stretch',
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.four,
-    borderRadius: Spacing.four,
-  },
-});
+    color:"white",//สีอักษร
+    fontSize: 32,//ขนาดอักษร
+    fontWeight: 700,//ความหน้าอักษร
+    fontStyle:"italic",
+    textAlign:"center"
+  }
+})
